@@ -35,6 +35,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Prijavi se"
+        android:textStyle="bold"
         android:textColorLink="#2B344F"
         android:textSize="34sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -66,11 +67,12 @@
         app:layout_constraintVertical_bias="0.43" />
 
     <Button
+        android:textColor="@color/white"
+        android:textSize="20sp"
         android:id="@+id/buttonLogin"
         android:layout_width="315dp"
         android:layout_height="48dp"
         android:background="@drawable/button_bg"
-        android:backgroundTint="@color/black"
         android:text="PRIJAVA"
         android:textColorLink="#2b344f"
         app:layout_constraintBottom_toBottomOf="parent"
