@@ -3,6 +3,7 @@ package com.example.quicknotesla;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -21,21 +22,24 @@ public class NoteDetailActivity extends AppCompatActivity {
         initWidgets();
     }
 
-    private void initWidgets()
-    {
+    private void initWidgets() {
         titleEditText = findViewById(R.id.titleEditText);
         descEditText = findViewById(R.id.descriptionEditText);
     }
 
-    public void saveNote(View view)
-    {
-        String title = String.valueOf(titleEditText.getText());
-        String desc = String.valueOf(descEditText.getText());
+    public void saveNote(View view) {
+        SQLiteManager sqLiteManager = SQLiteManager.instanceOfDataBase(this);
+        String title = titleEditText.getText().toString();
+        String desc = descEditText.getText().toString();
 
-        int id = Note.noteArrayList.size();
-        Note newNote = new Note(id, title, desc);
-        Note.noteArrayList.add(newNote);
-        finish();
+        if (!title.isEmpty() && !desc.isEmpty()) {
+            int id = Note.noteArrayList.size();
+            Note newNote = new Note(id, title, desc);
+            Note.noteArrayList.add(newNote);
+            sqLiteManager.addNoteToDatabase(newNote);
+            finish();  // Završi aktivnost nakon spremanja bilješke
+        } else {
+            Toast.makeText(this, "Molimo ispunite oba polja.", Toast.LENGTH_SHORT).show();
+        }
     }
-
 }
