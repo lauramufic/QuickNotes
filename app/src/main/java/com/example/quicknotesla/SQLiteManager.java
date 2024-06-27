@@ -6,16 +6,17 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Log;
 
-import java.sql.Date;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
+
 
 public class SQLiteManager extends SQLiteOpenHelper
 {
     private static SQLiteManager sqLiteManager;
+
     private static final String DATABASE_NAME = "NoteDB";
     private static final int DATABASE_VERSION = 1;
     private static final String TABLE_NAME = "Note";
@@ -29,13 +30,14 @@ public class SQLiteManager extends SQLiteOpenHelper
     @SuppressLint("SimpleDateFormat")
     private static final DateFormat dateFormat = new SimpleDateFormat("MM-dd-yyyy HH:mm:ss");
 
-    public SQLiteManager( Context context) {
+    public SQLiteManager(Context context)
+    {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
-    public static SQLiteManager instanceOfDataBase(Context context )
+    public static SQLiteManager instanceOfDatabase(Context context)
     {
-        if (sqLiteManager == null)
+        if(sqLiteManager == null)
             sqLiteManager = new SQLiteManager(context);
 
         return sqLiteManager;
@@ -48,7 +50,7 @@ public class SQLiteManager extends SQLiteOpenHelper
         sql = new StringBuilder()
                 .append("CREATE TABLE ")
                 .append(TABLE_NAME)
-                .append(" (")
+                .append("(")
                 .append(COUNTER)
                 .append(" INTEGER PRIMARY KEY AUTOINCREMENT, ")
                 .append(ID_FIELD)
@@ -60,17 +62,23 @@ public class SQLiteManager extends SQLiteOpenHelper
                 .append(DELETED_FIELD)
                 .append(" TEXT)");
 
-
         sqLiteDatabase.execSQL(sql.toString());
     }
 
     @Override
-    public void onUpgrade(SQLiteDatabase sqLiteDatabase, int oldVersion, int newVersion) {
-
-
+    public void onUpgrade(SQLiteDatabase sqLiteDatabase, int oldVersion, int newVersion)
+    {
+//        switch (oldVersion)
+//        {
+//            case 1:
+//                sqLiteDatabase.execSQL("ALTER TABLE " + TABLE_NAME + " ADD COLUMN " + NEW_COLUMN + " TEXT");
+//            case 2:
+//                sqLiteDatabase.execSQL("ALTER TABLE " + TABLE_NAME + " ADD COLUMN " + NEW_COLUMN + " TEXT");
+//        }
     }
 
-    public void addNoteToDatabase(Note note) {
+    public void addNoteToDatabase(Note note)
+    {
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
 
         ContentValues contentValues = new ContentValues();
@@ -79,13 +87,8 @@ public class SQLiteManager extends SQLiteOpenHelper
         contentValues.put(DESC_FIELD, note.getDescription());
         contentValues.put(DELETED_FIELD, getStringFromDate(note.getDeleted()));
 
-        long result = sqLiteDatabase.insert(TABLE_NAME, null, contentValues);
-        if (result == -1) {
-            // Došlo je do greške prilikom umetanja
-            Log.e("SQLiteManager", "Error inserting note into database");
-        }
+        sqLiteDatabase.insert(TABLE_NAME, null, contentValues);
     }
-
 
     public void populateNoteListArray()
     {
@@ -100,8 +103,8 @@ public class SQLiteManager extends SQLiteOpenHelper
                     int id = result.getInt(1);
                     String title = result.getString(2);
                     String desc = result.getString(3);
-                    String stringdeleted = result.getString(4);
-                    Date deleted = getDateFromString(stringdeleted);
+                    String stringDeleted = result.getString(4);
+                    Date deleted = getDateFromString(stringDeleted);
                     Note note = new Note(id,title,desc,deleted);
                     Note.noteArrayList.add(note);
                 }
@@ -121,18 +124,21 @@ public class SQLiteManager extends SQLiteOpenHelper
         sqLiteDatabase.update(TABLE_NAME, contentValues, ID_FIELD + " =? ", new String[]{String.valueOf(note.getId())});
     }
 
-    private String getStringFromDate(Date date) {
+    private String getStringFromDate(Date date)
+    {
         if(date == null)
-        return null;
+            return null;
         return dateFormat.format(date);
     }
 
     private Date getDateFromString(String string)
     {
-        try {
-            return (Date) dateFormat.parse(string);
+        try
+        {
+            return dateFormat.parse(string);
         }
-        catch (ParseException | NullPointerException e) {
+        catch (ParseException | NullPointerException e)
+        {
             return null;
         }
     }

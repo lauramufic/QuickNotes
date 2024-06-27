@@ -2,5 +2,9 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="plava">#3d4e75</color>
+    <color name="tirkizna">#beedec</color>
+    <color name="plava">#23447d</color>
+    <color name="crvena">#521d1d</color>
+    <color name="pozadina">#c8f7f4</color>
+    <color name="pink">#b85f93</color>
 </resources>

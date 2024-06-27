@@ -1,4 +1,5 @@
 package com.example.quicknotesla;
+
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,8 +12,8 @@ import androidx.annotation.Nullable;
 
 import java.util.List;
 
-public class NoteAdapter extends ArrayAdapter<Note> {
-
+public class NoteAdapter extends ArrayAdapter<Note>
+{
     public NoteAdapter(Context context, List<Note> notes)
     {
         super(context, 0, notes);

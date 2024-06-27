@@ -8,6 +8,18 @@
     android:background="@drawable/backround"
     tools:context=".LoginActivity">
 
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="59dp"
+        android:layout_height="65dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.115"
+        app:srcCompat="@drawable/logo_qn" />
+
     <EditText
         android:id="@+id/editTextLoginPassword"
         android:layout_width="321dp"
@@ -30,20 +42,23 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.524" />
 
+
+
+
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Prijavi se"
-        android:textStyle="bold"
-        android:textColorLink="#2B344F"
+        android:text="PRIJAVI SE"
+        android:textColor="@color/plava"
         android:textSize="34sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.493"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.253" />
+        app:layout_constraintVertical_bias="0.274" />
 
     <EditText
         android:id="@+id/editTextLoginUsername"
@@ -74,7 +89,6 @@
         android:layout_height="48dp"
         android:background="@drawable/button_bg"
         android:text="PRIJAVA"
-        android:textColorLink="#2b344f"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.531"
@@ -87,11 +101,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Novi korisnik? Registriraj se!"
-        android:textColorLink="#2b344f"
+        android:textColor="@color/plava"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.764" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

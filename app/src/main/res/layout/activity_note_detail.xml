@@ -5,11 +5,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@drawable/backround"
     tools:context=".NoteDetailActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="75dp"
         android:minHeight="?actionBarSize"
         android:theme="?actionBarTheme"
         android:background="@color/plava">
@@ -27,9 +28,9 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="SREMI"
-            android:textSize="22sp"
-            android:backgroundTint="@color/white"
+            android:text="Spremi"
+            android:textSize="18dp"
+            android:backgroundTint="@color/tirkizna"
             android:textColor="@color/plava"
             android:textStyle="bold"
             android:layout_gravity="end"
@@ -76,4 +77,18 @@
         android:minLines="3"
         android:textColor="@color/plava"
         android:layout_gravity="center"/>
+
+    <Button
+        android:id="@+id/deletedNoteButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="IZBRIŠI"
+        android:textSize="22sp"
+        android:backgroundTint="@color/crvena"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:onClick="deleteNote"
+        />
 </LinearLayout>

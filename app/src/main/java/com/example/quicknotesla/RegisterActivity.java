@@ -61,14 +61,14 @@ public class RegisterActivity extends AppCompatActivity {
                             Toast.makeText(getApplicationContext(), "Record inserted", Toast.LENGTH_SHORT).show();
                             startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
                         }
-                     else {
-                        Toast.makeText(getApplicationContext(), "Lozinka mora sadržavati minimalno 8 znakova i uključivati slovo,broj i poseban znak", Toast.LENGTH_SHORT).show();
+                        else {
+                            Toast.makeText(getApplicationContext(), "Lozinka mora sadržavati minimalno 8 znakova i uključivati slovo,broj i poseban znak", Toast.LENGTH_SHORT).show();
+                        }
+                    }else{
+                        Toast.makeText(getApplicationContext(), "Lozinke se ne podudaraju", Toast.LENGTH_SHORT).show();
                     }
-                }else{
-                    Toast.makeText(getApplicationContext(), "Lozinke se ne podudaraju", Toast.LENGTH_SHORT).show();
                 }
             }
-        }
         });
     }
     public static boolean isValid(String passwordhere){
@@ -81,20 +81,19 @@ public class RegisterActivity extends AppCompatActivity {
                     f1=1;
                 }
             }
-        for(int r = 0; r < passwordhere.length(); r++){
-            if(Character.isDigit(passwordhere.charAt(r))){
-                f2=1;
+            for(int r = 0; r < passwordhere.length(); r++){
+                if(Character.isDigit(passwordhere.charAt(r))){
+                    f2=1;
+                }
             }
-        }
-        for(int s = 0; s < passwordhere.length(); s++) {
-            if (Character.isDigit(passwordhere.charAt(s))) {
-                f3 = 1;
+            for(int s = 0; s < passwordhere.length(); s++) {
+                if (Character.isDigit(passwordhere.charAt(s))) {
+                    f3 = 1;
+                }
             }
+            if(f1==1 && f2==1 && f3==1)
+                return true;
+            return false;
         }
-        if(f1==1 && f2==1 && f3==1)
-            return true;
-        return false;
     }
 }
-}
-
