@@ -16,11 +16,14 @@ public class NoteDetailActivity extends AppCompatActivity
     private Button deleteButton;
     private Note selectedNote;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_note_detail);
+        SQLiteManager sqLiteManager = SQLiteManager.instanceOfDatabase(this);
+        sqLiteManager.populateNoteListArray();
         initWidgets();
         checkForEditNote();
     }
@@ -81,3 +84,4 @@ public class NoteDetailActivity extends AppCompatActivity
         finish();
     }
 }
+

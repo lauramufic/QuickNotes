@@ -13,8 +13,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 
-public class SQLiteManager extends SQLiteOpenHelper
-{
+public class SQLiteManager extends SQLiteOpenHelper {
     private static SQLiteManager sqLiteManager;
 
     private static final String DATABASE_NAME = "NoteDB";
@@ -30,22 +29,19 @@ public class SQLiteManager extends SQLiteOpenHelper
     @SuppressLint("SimpleDateFormat")
     private static final DateFormat dateFormat = new SimpleDateFormat("MM-dd-yyyy HH:mm:ss");
 
-    public SQLiteManager(Context context)
-    {
+    public SQLiteManager(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
-    public static SQLiteManager instanceOfDatabase(Context context)
-    {
-        if(sqLiteManager == null)
+    public static SQLiteManager instanceOfDatabase(Context context) {
+        if (sqLiteManager == null)
             sqLiteManager = new SQLiteManager(context);
 
         return sqLiteManager;
     }
 
     @Override
-    public void onCreate(SQLiteDatabase sqLiteDatabase)
-    {
+    public void onCreate(SQLiteDatabase sqLiteDatabase) {
         StringBuilder sql;
         sql = new StringBuilder()
                 .append("CREATE TABLE ")
@@ -66,19 +62,10 @@ public class SQLiteManager extends SQLiteOpenHelper
     }
 
     @Override
-    public void onUpgrade(SQLiteDatabase sqLiteDatabase, int oldVersion, int newVersion)
-    {
-//        switch (oldVersion)
-//        {
-//            case 1:
-//                sqLiteDatabase.execSQL("ALTER TABLE " + TABLE_NAME + " ADD COLUMN " + NEW_COLUMN + " TEXT");
-//            case 2:
-//                sqLiteDatabase.execSQL("ALTER TABLE " + TABLE_NAME + " ADD COLUMN " + NEW_COLUMN + " TEXT");
-//        }
+    public void onUpgrade(SQLiteDatabase sqLiteDatabase, int oldVersion, int newVersion) {
     }
 
-    public void addNoteToDatabase(Note note)
-    {
+    public void addNoteToDatabase(Note note) {
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
 
         ContentValues contentValues = new ContentValues();
@@ -90,30 +77,28 @@ public class SQLiteManager extends SQLiteOpenHelper
         sqLiteDatabase.insert(TABLE_NAME, null, contentValues);
     }
 
-    public void populateNoteListArray()
-    {
+    public void populateNoteListArray() {
         SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
 
-        try (Cursor result = sqLiteDatabase.rawQuery("SELECT * FROM " + TABLE_NAME, null))
-        {
-            if(result.getCount() != 0)
-            {
-                while (result.moveToNext())
-                {
+
+        Note.noteArrayList.clear();
+
+        try (Cursor result = sqLiteDatabase.rawQuery("SELECT * FROM " + TABLE_NAME, null)) {
+            if (result.getCount() != 0) {
+                while (result.moveToNext()) {
                     int id = result.getInt(1);
                     String title = result.getString(2);
                     String desc = result.getString(3);
                     String stringDeleted = result.getString(4);
                     Date deleted = getDateFromString(stringDeleted);
-                    Note note = new Note(id,title,desc,deleted);
+                    Note note = new Note(id, title, desc, deleted);
                     Note.noteArrayList.add(note);
                 }
             }
         }
     }
 
-    public void updateNoteInDB(Note note)
-    {
+    public void updateNoteInDB(Note note) {
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(ID_FIELD, note.getId());
@@ -124,22 +109,18 @@ public class SQLiteManager extends SQLiteOpenHelper
         sqLiteDatabase.update(TABLE_NAME, contentValues, ID_FIELD + " =? ", new String[]{String.valueOf(note.getId())});
     }
 
-    private String getStringFromDate(Date date)
-    {
-        if(date == null)
+    private String getStringFromDate(Date date) {
+        if (date == null)
             return null;
         return dateFormat.format(date);
     }
 
-    private Date getDateFromString(String string)
-    {
-        try
-        {
+    private Date getDateFromString(String string) {
+        try {
             return dateFormat.parse(string);
-        }
-        catch (ParseException | NullPointerException e)
-        {
+        } catch (ParseException | NullPointerException e) {
             return null;
         }
     }
+
 }

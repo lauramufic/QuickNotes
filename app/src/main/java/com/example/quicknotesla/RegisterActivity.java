@@ -58,11 +58,11 @@ public class RegisterActivity extends AppCompatActivity {
                     if (password.compareTo(confirm) == 0) {
                         if (isValid(password)) {
                             db.register(username, email, password);
-                            Toast.makeText(getApplicationContext(), "Record inserted", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), "Uspješno ste registrirani", Toast.LENGTH_SHORT).show();
                             startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
                         }
                         else {
-                            Toast.makeText(getApplicationContext(), "Lozinka mora sadržavati minimalno 8 znakova i uključivati slovo,broj i poseban znak", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), "Lozinka mora sadržavati 8 znakova uključujućo slovo,broj i poseban znak", Toast.LENGTH_SHORT).show();
                         }
                     }else{
                         Toast.makeText(getApplicationContext(), "Lozinke se ne podudaraju", Toast.LENGTH_SHORT).show();
@@ -87,7 +87,8 @@ public class RegisterActivity extends AppCompatActivity {
                 }
             }
             for(int s = 0; s < passwordhere.length(); s++) {
-                if (Character.isDigit(passwordhere.charAt(s))) {
+                char c = passwordhere.charAt(s);
+                if(c>=33&&c<=46||c==64){
                     f3 = 1;
                 }
             }

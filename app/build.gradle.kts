@@ -1,3 +1,8 @@
+val androidTestImplementation: Unit
+    get() {
+        TODO()
+    }
+
 plugins {
     alias(libs.plugins.android.application)
 }
